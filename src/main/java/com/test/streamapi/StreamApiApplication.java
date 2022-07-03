@@ -71,6 +71,11 @@ public class StreamApiApplication {
 				.limit(1)
 				.collect(Collectors.toList());
 		System.out.println(shortCircuit);
+
+		//Finite data
+		Stream.generate(Math::random)
+				.limit(5)
+				.forEach(value -> System.out.println(value));
 	}
 
 }
