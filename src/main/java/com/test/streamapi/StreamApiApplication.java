@@ -44,6 +44,19 @@ public class StreamApiApplication {
 						employee.getProjects()
 				)).collect(Collectors.toList());
 		System.out.println(filterEmployee);
+
+
+		//findFirst
+		Employee firstEmployee = employees.stream()
+				.filter(employee -> employee.getSalary() > 59000.0)
+				.map(employee -> new Employee(
+						employee.getFirstName(),
+						employee.getLastName(),
+						employee.getSalary() * 1.10,
+						employee.getProjects()
+				)).findFirst()
+				.orElse(null);
+		System.out.println(firstEmployee);
 	}
 
 }
