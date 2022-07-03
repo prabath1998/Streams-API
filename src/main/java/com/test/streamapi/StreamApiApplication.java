@@ -4,7 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -76,6 +78,24 @@ public class StreamApiApplication {
 		Stream.generate(Math::random)
 				.limit(5)
 				.forEach(value -> System.out.println(value));
+
+		//sorting
+		List<Employee> sorted =  employees.stream()
+				.sorted((o1,o2)-> o1.getFirstName()
+				 .compareToIgnoreCase(o2.getFirstName()))
+				.collect(Collectors.toList());
+		System.out.println(sorted);
+
+		//min or max
+		employees.stream()
+				.max(Comparator.comparing(Employee::getSalary))
+				.orElseThrow(NoSuchElementException::new);
+
+		//reduce
+		Double totalSal = employees.stream()
+				.map(employee -> employee.getSalary())
+				.reduce(0.0,Double::sum);
+		System.out.println(totalSal);
 	}
 
 }
