@@ -57,6 +57,13 @@ public class StreamApiApplication {
 				)).findFirst()
 				.orElse(null);
 		System.out.println(firstEmployee);
+
+		//flatMap
+		String projects =  employees.stream()
+				.map(employee -> employee.getProjects())
+				.flatMap(strings -> strings.stream())
+				.collect(Collectors.joining(","));
+		System.out.println(projects);
 	}
 
 }
