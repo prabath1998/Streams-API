@@ -64,6 +64,13 @@ public class StreamApiApplication {
 				.flatMap(strings -> strings.stream())
 				.collect(Collectors.joining(","));
 		System.out.println(projects);
+
+		//short circuit operations
+		List<Employee> shortCircuit = employees.stream()
+				.skip(1)
+				.limit(1)
+				.collect(Collectors.toList());
+		System.out.println(shortCircuit);
 	}
 
 }
